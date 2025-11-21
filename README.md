@@ -5,17 +5,15 @@ SvelteStyleLink is a VS Code extension that lets you jump from any class name us
 
 ## Table of Contents
 
-1. [Features](#features)
-2. [Installation](#installation)
-3. [Usage](#usage)
-4. [How It Works](#how-it-works)
-5. [Configuration](#configuration)
-6. [Development](#development)
-7. [Testing](#testing)
-8. [Troubleshooting](#troubleshooting)
-9. [Roadmap](#roadmap)
-10. [Release Notes](#release-notes)
-11. [License](#license)
+- [SvelteStyleLink](#sveltestylelink)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [How It Works](#how-it-works)
+  - [Configuration](#configuration)
+  - [Roadmap](#roadmap)
+  - [License](#license)
 
 ## Features
 
@@ -32,7 +30,7 @@ If installed via the extension manager, it just works. No configuration.
 
 To install the project
 ```bash
-git clone https://github.com/<you>/sveltestylelink.git
+git clone https://github.com/tumininucodes/sveltestylelink.git
 cd sveltestylelink
 npm install
 ```
