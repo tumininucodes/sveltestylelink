@@ -2,7 +2,9 @@
   "name": "sveltestylelink",
   "displayName": "SvelteStyleLink",
   "description": "Jump from any CSS or SCSS class used inside your Svelte components directly to its style definition.",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "publisher": "tumininu",
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.106.1"
   },
