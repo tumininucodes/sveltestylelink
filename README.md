@@ -1,71 +1,84 @@
-# sveltestylelink README
+# SvelteStyleLink
 
-This is the README for your extension "sveltestylelink". After writing up a brief description, we recommend including the following sections.
+SvelteStyleLink is a VS Code extension that lets you jump from any class name used inside your Svelte components straight to the CSS/SCSS selector that styles it. No more hunting through `<style>` blocks or external stylesheets. Takes you exactly where you need to be.
+
+
+## Table of Contents
+
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [How It Works](#how-it-works)
+5. [Configuration](#configuration)
+6. [Development](#development)
+7. [Testing](#testing)
+8. [Troubleshooting](#troubleshooting)
+9. [Roadmap](#roadmap)
+10. [Release Notes](#release-notes)
+11. [License](#license)
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Jump to selector definitions** – highlight or place the caret inside `class="..."` and trigger VS Code’s “Go to Definition”. You’ll land on the matching `.your-class` selector.
+- **Inline `<style>` awareness** – works with CSS/SCSS declared in the same `.svelte` file, including `<style lang="scss">`.
+- **External stylesheet lookup** – scans workspace `*.css` and `*.scss` files and opens the first match. Ideal for shared utility sheets.
+- **Zero configuration** – activate once and forget. The provider registers automatically for Svelte documents.
+- **Plays nicely with standard gestures** – `F12`, `Cmd/Ctrl+Click`, and “Peek Definition” all use the provider.
 
-For example if there is an image subfolder under your extension project workspace:
 
-\!\[feature X\]\(images/feature-x.png\)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Installation
+If installed via the extension manager, it just works. No configuration.
 
-## Requirements
+To install the project
+```bash
+git clone https://github.com/<you>/sveltestylelink.git
+cd sveltestylelink
+npm install
+```
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+To run it locally during development, press `F5` inside VS Code to launch an Extension Development Host. For distribution:
 
-## Extension Settings
+```bash
+npm run package
+```
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+This produces a `.vsix` you can install via `code --install-extension`.
 
-For example:
+## Usage
 
-This extension contributes the following settings:
+1. Open a Svelte project in VS Code with SvelteStyleLink enabled.
+2. Open any `.svelte` file containing a `class=""` attribute.
+3. Move the caret inside the class name (e.g. `hero-card`).
+4. Press `F12`, `Cmd/Ctrl+Click`, or select “Peek Definition”.
+5. VS Code navigates directly to the matching selector either in the same file’s `<style>` section or in the first external stylesheet match.
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+If no selector exists, VS Code stays put—no disruptive errors.
 
-## Known Issues
+## How It Works
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+The extension registers a `DefinitionProvider` (see `src/SvelteCSSDefinitionProvider.ts`) for the Svelte language:
 
-## Release Notes
+1. Confirms the caret is inside a `class=""` attribute.
+2. Searches the current document’s `<style>` block for `.className`.
+3. If not found, scans workspace CSS/SCSS files via `vscode.workspace.findFiles("**/*.{css,scss}")`, opens each, and checks for the selector.
+4. Returns a `vscode.Location` corresponding to the first match, which VS Code opens for you.
 
-Users appreciate release notes as you update your extension.
+This keeps lookups lightweight while covering the most common Svelte styling patterns.
 
-### 1.0.0
+## Configuration
 
-Initial release of ...
+No user settings are required.
 
-### 1.0.1
+## Roadmap
 
-Fixed issue #.
+- Return multiple definition candidates when a class exists in several files.
+- Provide settings for include/exclude globs and additional language modes.
+- Recognize `class:` directives and utility-first conventions.
+- Cache selector positions per document and invalidate on save for better performance.
 
-### 1.1.0
 
-Added features X, Y, and Z.
+## License
 
----
+MIT © SvelteStyleLink contributors.
 
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**

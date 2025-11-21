@@ -1,7 +1,7 @@
 {
   "name": "sveltestylelink",
   "displayName": "SvelteStyleLink",
-  "description": "Effortlessly jump from any CSS or SCSS class used inside your Svelte components directly to its style definition.",
+  "description": "Jump from any CSS or SCSS class used inside your Svelte components directly to its style definition.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.106.1"
@@ -9,6 +9,10 @@
   "categories": [
     "Other"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tumininucodes/sveltestylelink"
+  },
   "activationEvents": [
     "onLanguage:svelte"
   ],
